@@ -14,8 +14,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../db"));
 class RolesController {
     index(req, res) {
-        var rols = db_1.default.query('SELECT *FROM roles');
-        res.json(rols);
+        return __awaiter(this, void 0, void 0, function* () {
+            var rols = yield db_1.default.query('SELECT * FROM roles');
+            res.send(rols);
+        });
     }
     add(req, res) {
         return __awaiter(this, void 0, void 0, function* () {

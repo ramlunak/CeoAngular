@@ -1,7 +1,23 @@
+import { NgModule } from '@angular/core';
 import {RouterModule,Routes} from '@angular/router';
 
-const routes:Routes = [
-{ }
-];
+import { CursoComponent } from './componentes/curso/curso.component';
 
-export const app_routes = RouterModule.forRoot(routes);
+
+const routes:Routes = [   
+    { path: 'curso', component: CursoComponent }
+    ];
+
+@NgModule({
+    declarations: [
+     CursoComponent,       
+      ],
+imports:[
+
+],
+exports:[
+   
+]
+    })
+
+export class appRoutes{};

@@ -3,9 +3,9 @@ import pool from '../db'
 
 class RolesController{
     
-   public index (req : Request,res:Response) {
-        var rols = pool.query('SELECT *FROM roles');
-         res.json(rols);
+   public async index (req : Request,res:Response) {
+        var rols = await  pool.query('SELECT * FROM roles');
+         res.send(rols);
     }
 
     public async add (req : Request,res:Response) {       
