@@ -13,13 +13,11 @@ import {RolesService} from '../../services/roles.service';
 })
 
 export class RolComponent implements OnInit {
-
   rolesArray: Roles[] = [
     {id:1,nombre:'Admin'},
     {id:2,nombre:'Profesor'},
     {id:3,nombre:'Estudiante'}
   ]; 
-
   //DataTable --
   displayedColumns: string[] = ['id', 'nombre','commands',];
   dataSource = new MatTableDataSource<Roles>(this.rolesArray);
@@ -27,14 +25,30 @@ export class RolComponent implements OnInit {
 
   constructor(public rolesService:RolesService) {}
     
+  nombre:string="";
+
   ngOnInit() {
- //  this.rolesService.getRoles().subscribe(
-//      data=>{this.rolesArray = data;}
-//      ,error => console.log('error')
-//   )
+  //  this.rolesService.getRoles().subscribe(
+  //      data=>{this.rolesArray = data;}
+  //      ,error => console.log('error')
+  //   )
 
   this.dataSource.paginator = this.paginator;
 
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  
+  guardarClick(event: Event) {
+    
+    this.rolesArray.push({
+      id:1,
+      nombre:this.nombre
+    });
+    this.dataSource = new MatTableDataSource<Roles>(this.rolesArray);
+    this.dataSource.paginator = this.paginator;
+    this.nombre ="";
   }
 
 }

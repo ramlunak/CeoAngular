@@ -5,7 +5,10 @@ import {
     MatPaginatorModule,
     MatButtonModule,   
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    MatToolbarModule
 } from '@angular/material'
 
 @NgModule({
@@ -14,14 +17,20 @@ import {
         MatPaginatorModule,
         MatButtonModule,    
         MatInputModule,
-        MatDialogModule
+        MatDialogModule,
+        MatButtonToggleModule,
+        MatIconModule,
+        MatToolbarModule
     ],
     exports:[      
         MatTableModule,
         MatPaginatorModule,
         MatButtonModule,       
         MatInputModule,
-        MatDialogModule
+        MatDialogModule,
+        MatButtonToggleModule,
+        MatIconModule,
+        MatToolbarModule
     ]
 })
 
