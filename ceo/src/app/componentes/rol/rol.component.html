@@ -3,7 +3,7 @@
 <div class="modal-content" >
    <div class="modal-header">
            
-      <button mat-fab data-dismiss="modal"  data-toggle="modal" data-target="#exampleModalCenter"
+      <button (click)="setTransaccionNew()" mat-fab data-dismiss="modal"  data-toggle="modal" data-target="#exampleModalCenter"
        class="color-success font-size-20px">+</button>    
       
        <div class="font-size-20px">Roles</div>
@@ -30,17 +30,23 @@
             </div>
             <div class="modal-body">
                     <form class="example-form">
-                        
+                                 
+
                          <mat-form-field class="example-full-width">
-                              <input matInput placeholder="Nombre" [value]="nombre" (keyup)="nombre = $event.target.value">
+                              <input matInput type="text" required
+                                     placeholder="Nombre" [value]="nombre" 
+                                     (keyup)="nombre = $event.target.value">
                             </mat-form-field>                         
                     
                         </form>   
             </div>
             <div class="modal-footer">
              <button mat-stroked-button data-dismiss="modal">Cancelar</button> 
-             <button (click)="guardarClick()"  mat-raised-button color='primary'>Guardar</button>
-                    
+
+             <button *ngIf="transaccionIsNew" (click)="guardarClick()"  mat-raised-button color='primary'>Guardar</button>
+             <button *ngIf="!transaccionIsNew" (click)="guardarClick()" data-dismiss="modal" mat-raised-button color='primary'>Guardar</button>
+                  
+             
             </div>
           </div>
         </div>
@@ -63,7 +69,7 @@
                 </div>
                 <div class="modal-footer">
                   <button mat-stroked-button data-dismiss="modal">Cancelar</button> 
-                  <button  mat-raised-button color='warn' >Eliminar</button>
+                  <button (click) = "eliminarClick()" data-dismiss="modal" mat-raised-button color='warn' >Eliminar</button>
                   
                 </div>
               </div>
@@ -89,13 +95,13 @@
             
           <ng-container matColumnDef="commands" >
                 <th mat-header-cell *matHeaderCellDef>  </th>
-                <td mat-cell *matCellDef="let row">
+                <td mat-cell *matCellDef="let row = index;">
                   
-                   <button mat-icon-button>
+                   <button (click)="id = row;cargarDatos()" mat-icon-button data-toggle="modal" data-target="#exampleModalCenter"> 
                       <mat-icon color='primary'>edit</mat-icon>
                     </button>
                     
-                     <button mat-icon-button  data-toggle="modal"  data-target="#delete_rol">                  
+                     <button (click)="id = row" mat-icon-button  data-toggle="modal" data-target="#delete_rol">                  
                         <mat-icon color='warn'>delete</mat-icon>
                       </button>
 

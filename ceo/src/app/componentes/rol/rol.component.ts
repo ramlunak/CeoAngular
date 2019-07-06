@@ -6,6 +6,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Roles} from '../../models/roles';
 import {RolesService} from '../../services/roles.service';
 
+
 @Component({
   selector: 'app-rol',
   templateUrl: './rol.component.html',
@@ -13,6 +14,7 @@ import {RolesService} from '../../services/roles.service';
 })
 
 export class RolComponent implements OnInit {
+
   rolesArray: Roles[] = [
     {id:1,nombre:'Admin'},
     {id:2,nombre:'Profesor'},
@@ -25,7 +27,10 @@ export class RolComponent implements OnInit {
 
   constructor(public rolesService:RolesService) {}
     
+  transaccionIsNew:boolean=true;
+  dataUpdate:Roles;
   nombre:string="";
+  id:number=0;
 
   ngOnInit() {
   //  this.rolesService.getRoles().subscribe(
@@ -42,13 +47,44 @@ export class RolComponent implements OnInit {
   
   guardarClick(event: Event) {
     
-    this.rolesArray.push({
-      id:1,
-      nombre:this.nombre
-    });
+   
+    if(this.transaccionIsNew)
+    {
+
+      this.rolesArray.push({
+        id:1,
+        nombre:this.nombre
+      });
+      this.dataSource = new MatTableDataSource<Roles>(this.rolesArray);
+      this.dataSource.paginator = this.paginator;
+      this.nombre ="";
+    }
+    else{
+      this.dataUpdate.nombre = this.nombre;
+      this.rolesArray.splice(this.id,1,this.dataUpdate);
+      this.dataSource = new MatTableDataSource<Roles>(this.rolesArray);
+      this.dataSource.paginator = this.paginator;
+      this.nombre ="";
+    }
+    
+  }
+
+  eliminarClick() {
+    this.rolesArray.splice(this.id,1);
     this.dataSource = new MatTableDataSource<Roles>(this.rolesArray);
     this.dataSource.paginator = this.paginator;
     this.nombre ="";
+  }
+
+
+  cargarDatos(){
+    this.transaccionIsNew = false;
+    this.dataUpdate = this.rolesArray[this.id];
+    this.nombre = this.dataUpdate.nombre;
+}
+
+setTransaccionNew(){
+        this.transaccionIsNew = true;
   }
 
 }
