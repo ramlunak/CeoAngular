@@ -25,7 +25,7 @@ export class RolComponent implements OnInit {
   dataSource = new MatTableDataSource<Roles>(this.rolesArray);
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(public rolesService:RolesService) {}
+  constructor(public service:RolesService) {}
     
   transaccionIsNew:boolean=true;
   dataUpdate:Roles;
@@ -33,7 +33,9 @@ export class RolComponent implements OnInit {
   id:number=0;
 
   ngOnInit() {
-  //  this.rolesService.getRoles().subscribe(
+ this.paginator._intl.itemsPerPageLabel="Registros por página";
+
+  //  this.service.getRoles().subscribe(
   //      data=>{this.rolesArray = data;}
   //      ,error => console.log('error')
   //   )

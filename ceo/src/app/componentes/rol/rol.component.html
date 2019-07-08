@@ -29,22 +29,25 @@
               </button>
             </div>
             <div class="modal-body">
-                    <form class="example-form">
+
+                    <form [formGroup]="service.form" class="example-form">
                                  
 
                          <mat-form-field class="example-full-width">
-                              <input matInput type="text" required
+                              <input matInput type="text" required formControlName="nombre"
                                      placeholder="Nombre" [value]="nombre" 
                                      (keyup)="nombre = $event.target.value">
+                                     <mat-error>Este campo es obligatorio</mat-error>
                             </mat-form-field>                         
                     
                         </form>   
+
             </div>
             <div class="modal-footer">
              <button mat-stroked-button data-dismiss="modal">Cancelar</button> 
 
-             <button *ngIf="transaccionIsNew" (click)="guardarClick()"  mat-raised-button color='primary'>Guardar</button>
-             <button *ngIf="!transaccionIsNew" (click)="guardarClick()" data-dismiss="modal" mat-raised-button color='primary'>Guardar</button>
+             <button [disabled]="service.form.invalid" *ngIf="transaccionIsNew" (click)="guardarClick()"  mat-raised-button color='primary'>Guardar</button>
+             <button [disabled]="service.form.invalid" *ngIf="!transaccionIsNew" (click)="guardarClick()" data-dismiss="modal" mat-raised-button color='primary'>Guardar</button>
                   
              
             </div>
@@ -111,7 +114,7 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>      
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <mat-paginator  [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
       <!--END GRID -->         
   
 </div>
